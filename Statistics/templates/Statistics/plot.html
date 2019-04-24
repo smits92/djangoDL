@@ -1,0 +1,181 @@
+{% load static %}
+
+{% block content %}
+
+<html>
+<head>
+    <title>DeepLearning</title>
+    <!--<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>-->
+{#    <script src="{% static 'Statistics/plotly-latest.min.js' %}"></script>#}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example with a side menu that hides on mobile, just like the Pure website.">
+
+
+    <link rel="stylesheet" href="{% static 'Statistics/side-menu.css' %}">
+    <link rel="stylesheet" href="{% static 'Statistics/pure.css' %}">
+
+    <style>
+.box {
+  width: 10%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #3498DB;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #3498DB;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #3498DB;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+.mycolumn {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clear floats after image containers */
+.myrow::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+    </style>
+
+</head>
+
+<body style="background-color:#ECECEC">
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+
+    <div id="menu">
+        <div class="pure-menu">
+            <a class="pure-menu-heading" href="/">Easy DL</a>
+            <ul class="pure-menu-list">
+                <li><a href="/upload" class="pure-menu-link">Upload Image</a></li>
+
+            </ul>
+        </div>
+    </div>
+
+  <div id="main">
+      <div class="header" style="background-color:#57565A;text-align:center">
+          <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ file_form.as_p }}
+              <button type="submit" class="pure-button pure-button-primary">Upload</button>
+          </form>
+      </div>
+<table class="pure-table"; align="center">
+    <thead>
+        <tr>
+            <th>Bicubic</th>
+            <th>Super Resolution</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+            <td>
+          <div class="pure-img">
+            <img src="{% static 'Statistics/tmpLR.png' %}" alt="Bicubic" style="width:500px;">
+          </div>
+            </td>
+            <td>
+          <div class="pure-img">
+            <img src="{% static 'Statistics/tmpSR.png' %}" alt="Super Resolution" style="width:500px;">
+          </div>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+
+
+  </div>
+
+  </div>
+</div><script src="{% static 'Statistics/ui.js' %}"></script>
+
+</body>
+</html>
+
+{% endblock %}
